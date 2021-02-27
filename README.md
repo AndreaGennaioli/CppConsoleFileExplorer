@@ -1,0 +1,2 @@
+# Console File Explorer
+This is a simple and fast file explorer written in c++ that works in console. I made this project to know more about c++ and his libraries about the reading of directories and the reading of single char input.
