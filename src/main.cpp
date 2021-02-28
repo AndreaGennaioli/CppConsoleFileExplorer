@@ -6,12 +6,12 @@
 #include <string.h>
 #include <windows.h>
 
-DIR *pdir;
-struct dirent *pent;
+DIR *pdir = NULL;
+struct dirent *pent = NULL;
 int items_count = 0;
 bool items_count_bool = true;
-std::string _pent[300];
-std::string path_history[50];
+std::string _pent[300] = {};
+std::string path_history[50] = {};
 int path_h_index = 0;
 std::string path = "";
 std::string stringa = "";
@@ -25,10 +25,9 @@ void print() {
 		if(_pent[_index] == "") continue;
 		if(items_count_bool) items_count++;
 		
-			stringa += "  " + _pent[_index] + "\n";
-		
+		stringa += "  " + _pent[_index] + "\n";
 	}
-		
+
 	std::cout << "Current Path:    " << path_history[path_h_index] << "\n\n";
 	std::cout << stringa;
 }
@@ -58,7 +57,6 @@ void readDirectory(std::string _dir) {
 	items_count = 0;
 	items_count_bool = true;
 	closedir(pdir);
-	print();
 }
 
 int main() {
@@ -71,12 +69,17 @@ int main() {
 	while(input != 'q') {
 		stringa = "";
 		_index = 0;
-		
-		if((int) input == 13) {
+		if((int) input == 13 || (int) input == 77) {
 			readDirectory("/"+_pent[index]);
+			print();
 			resetScrolling(0);
 			index = 0;
-		} else if( input == 'H') {
+		} else if ((int) input == 75) {
+			readDirectory("/..");
+			print();
+			resetScrolling(0);
+			index = 0;
+		}else if( input == 'H') {
 			if(index == 0) {
 				index = items_count-1;
 			} else index--;
